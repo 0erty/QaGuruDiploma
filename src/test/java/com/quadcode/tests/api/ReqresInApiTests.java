@@ -1,6 +1,8 @@
 package com.quadcode.tests.api;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -9,6 +11,8 @@ import static org.hamcrest.core.Is.is;
 class ReqresInApiTests {
 
     @Test
+    @Tag("API")
+    @DisplayName("Successful getting user list (API)")
     void getListUser() {
         given()
                 .when()
@@ -19,6 +23,8 @@ class ReqresInApiTests {
     }
 
     @Test
+    @Tag("API")
+    @DisplayName("Successful user creating (API)")
     void postCreateUser() {
         given()
                 .contentType(ContentType.JSON)
@@ -31,6 +37,8 @@ class ReqresInApiTests {
     }
 
     @Test
+    @Tag("API")
+    @DisplayName("Successful user updating (API)")
     void putUpdateUser() {
         given()
                 .contentType(ContentType.JSON)
@@ -43,6 +51,8 @@ class ReqresInApiTests {
     }
 
     @Test
+    @Tag("API")
+    @DisplayName("Successful user updating (2 method) (API)")
     void patchUpdateUser() {
         given()
                 .contentType(ContentType.JSON)
@@ -55,6 +65,8 @@ class ReqresInApiTests {
     }
 
     @Test
+    @Tag("API")
+    @DisplayName("Successful user deleting (API)")
     void deleteUser() {
         given()
                 .when()
