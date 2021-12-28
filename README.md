@@ -52,7 +52,7 @@ ___
 
 Более подробно с результатми тестов (шаги, скриншоты, видео прохождения теста, page source и browser console log) можно ознакомиться:
 * В Jenkins через Allure Reports (перейти по ссылке в отчете телеграм).
-![Allure](Allure_jenkins.png)
+![Allure](img/Allure_jenkins.png)
 ___
 
 
