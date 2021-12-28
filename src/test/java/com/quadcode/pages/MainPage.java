@@ -11,7 +11,7 @@ public class MainPage {
     Faker faker = new Faker();
 
     private SelenideElement WelcomeInner = $(".welcome__inner"),
-            TryQuadcodeBrokerageBtn = $(".wel1come__inner > a"),
+            TryQuadcodeBrokerageBtn = $(".welcome__inner > a"),
             RequestModalTitle = $(".form__title"),
             FirstNameField = $("#first_name"),
             LastNameField = $("#last_name"),

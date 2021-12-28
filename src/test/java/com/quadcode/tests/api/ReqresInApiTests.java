@@ -26,7 +26,7 @@ class ReqresInApiTests {
                 .when()
                 .post("https://reqres.in/api/users")
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .body("name", is("morpheus"));
     }
 
