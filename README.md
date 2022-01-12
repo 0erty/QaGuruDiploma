@@ -51,9 +51,26 @@ ___
 ## Анализ результатов
 
 Более подробно с результатми тестов (шаги, скриншоты, видео прохождения теста, page source и browser console log) можно ознакомиться:
-* В Jenkins через Allure Reports (перейти по ссылке в отчете телеграм).
+* В Jenkins через Allure Reports (перейти по ссылке в отчете телеграм)
+* В Allure TestOps.
+___
+
+## Анализ результатов в Jenkins через Allure Reports
 ![Allure](img/Allure_jenkins.png)
 ___
+
+## Анализ результатов в Allure TestOps
+
+![Allure TestOps](./img/Allure_Testops.png)
+
+---
+## Добавлена интеграция с Jira, где можно посмотреть запускаемые кейсы и их результаты.
+
+Перейти в Jira можно [по ссылке](https://jira.autotests.cloud/projects/HOMEWORK/issues/HOMEWORK-273?filter=allissues)
+
+![Jira](./img/Jira.png)
+
+---
 
 
 ### Видео прохождения теста, взятое из среды выполнения (из Selenoid)
