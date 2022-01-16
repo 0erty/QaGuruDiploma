@@ -1,6 +1,7 @@
 plugins{
     id 'java-library'
     id 'io.qameta.allure' version '2.8.1'
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 repositories {
@@ -24,18 +25,15 @@ allure {
 dependencies{
     testImplementation (
             "com.codeborne:selenide:$selenideVersion",
-            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "com.github.javafaker:javafaker:1.0.2",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "org.aeonbits.owner:owner:1.0.12",
             "io.rest-assured:rest-assured:4.4.0",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "org.slf4j:slf4j-simple:1.7.30")
+            "org.slf4j:slf4j-simple:1.7.30",
+            "com.fasterxml.jackson.core:jackson-databind:2.11.2",
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
-}
-
-test {
-    useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile) {
@@ -66,7 +64,13 @@ tasks.withType(Test) {
     }
 }
 
-task mainTest(type: Test){
+task ReqresApiTest(type: Test){
+    useJUnitPlatform {
+        includeTags 'Reqres'
+    }
+}
+
+task QuadCodeTest(type: Test){
     useJUnitPlatform {
         includeTags 'QuadCode'
     }

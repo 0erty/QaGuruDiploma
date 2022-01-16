@@ -1,77 +1,80 @@
 package com.quadcode.tests.api;
 
-import io.restassured.http.ContentType;
+import com.quadcode.model.LombokUserData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.quadcode.specification.ReqresSpec.request;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag("Reqres")
 class ReqresInApiTests {
 
     @Test
-    @Tag("API")
-    @DisplayName("Successful getting user list (API)")
+    @DisplayName("Successful single user (API)")
     void getListUser() {
-        given()
-                .when()
-                .get("https://reqres.in/api/users?page=2")
-                .then()
+        LombokUserData data = given()
+                .spec(request)
+         .when()
+                .get("/users/2")
+         .then()
                 .statusCode(200)
-                .body("total", is(12));
+                .log().body()
+                .extract().as(LombokUserData.class);
+
+        assertEquals("Janet", data.getUser().getFirstName());
     }
 
     @Test
-    @Tag("API")
     @DisplayName("Successful user creating (API)")
     void postCreateUser() {
         given()
-                .contentType(ContentType.JSON)
+                .spec(request)
                 .body("{ \"name\": \"morpheus\", \"job\": \"leader\" }")
-                .when()
-                .post("https://reqres.in/api/users")
-                .then()
+        .when()
+                .post("/users")
+        .then()
                 .statusCode(201)
                 .body("name", is("morpheus"));
     }
 
     @Test
-    @Tag("API")
     @DisplayName("Successful user updating (API)")
     void putUpdateUser() {
         given()
-                .contentType(ContentType.JSON)
+                .spec(request)
                 .body("{ \"name\": \"morpheus\", \"job\": \"zion resident\" }")
-                .when()
-                .put("https://reqres.in/api/users/2")
-                .then()
+        .when()
+                .put("/users/2")
+        .then()
                 .statusCode(200)
                 .body("job", is("zion resident"));
     }
 
     @Test
-    @Tag("API")
     @DisplayName("Successful user updating (2 method) (API)")
     void patchUpdateUser() {
         given()
-                .contentType(ContentType.JSON)
+                .spec(request)
                 .body("{ \"name\": \"morpheus\", \"job\": \"zion resident\" }")
-                .when()
-                .patch("https://reqres.in/api/users/2")
-                .then()
+        .when()
+                .patch("/users/2")
+         .then()
                 .statusCode(200)
                 .body("job", is("zion resident"));
     }
 
     @Test
-    @Tag("API")
     @DisplayName("Successful user deleting (API)")
     void deleteUser() {
         given()
-                .when()
+                .spec(request)
+        .when()
                 .delete("https://reqres.in/api/users/2")
-                .then()
+        .then()
                 .statusCode(204);
     }
 }

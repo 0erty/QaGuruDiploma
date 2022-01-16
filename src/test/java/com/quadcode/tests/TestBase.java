@@ -1,5 +1,6 @@
 package com.quadcode.tests;
 
+import com.codeborne.selenide.Configuration;
 import com.quadcode.config.Project;
 import com.quadcode.helpers.AllureAttachments;
 import com.quadcode.helpers.DriverSettings;
@@ -16,6 +17,7 @@ public class TestBase {
     static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         DriverSettings.configure();
+        Configuration.baseUrl = Project.config.webUrl();
     }
 
     @AfterEach

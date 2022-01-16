@@ -1,80 +1,87 @@
 package com.quadcode.pages;
 
-import com.codeborne.selenide.Condition;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.text;
 import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class MainPage {
 
-    Faker faker = new Faker();
+    private SelenideElement welcomeTitle = $(".welcome__inner > header > h1"),
+                            tryQuadcodeBrokerageBtn = $(".welcome__inner > a"),
+                            requestModalTitle = $(".form__title"),
+                            firstNameField = $("#first_name"),
+                            lastNameField = $("#last_name"),
+                            phoneField = $("#phone"),
+                            emailField = $("#email"),
+                            messageField = $("#message"),
+                            privacyPolicyCheckbox = $(".custom-checkbox__label-box"),
+                            submitBtn = $("[name='submit']"),
+                            successModal = $(".form-message.form-success"),
+                            successModalTitle = $(".form-message.form-success > div > div.form-message__title"),
+                            getSuccessModalOkBtn = $(".form-message.form-success > div > div > a.custom-button.js-close-modal");
 
-    private SelenideElement WelcomeInner = $(".welcome__inner"),
-            TryQuadcodeBrokerageBtn = $(".welcome__inner > a"),
-            RequestModalTitle = $(".form__title"),
-            FirstNameField = $("#first_name"),
-            LastNameField = $("#last_name"),
-            PhoneField = $("#phone"),
-            EmailField = $("#email"),
-            MessageField = $("#message"),
-            PrivacyPolicyCheckbox = $(".custom-checkbox__label-box"),
-            SubmitBtn = $("[name='submit']");
-
-    private final String firstName = faker.name().firstName(),
-                         lastName = faker.name().lastName(),
-                         phoneNumber = faker.phoneNumber().cellPhone(),
-                         email = faker.internet().emailAddress(),
-                         message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.";
+    private final String message = "Lorem ipsum dolor sit amet.",
+                         welcomeMessage = "Launch the brokerage business in just a few clicks",
+                         modalTitle = "Enhance your business with industry proven software",
+                         successMessage = "Your request was successfully sent!";
 
 
-    public MainPage checkWelcomeInner() {
-        WelcomeInner.shouldBe(Condition.visible);
+    public MainPage checkWelcomeTitle() {
+        welcomeTitle.shouldBe(visible).shouldHave(text(welcomeMessage));
         return this;
     }
 
     public MainPage clickContactBtn() {
-        TryQuadcodeBrokerageBtn.shouldBe(Condition.visible).click();
+        tryQuadcodeBrokerageBtn.click();
         return this;
     }
 
     public MainPage checkRequestModal() {
-        RequestModalTitle.shouldBe(Condition.visible).shouldHave(Condition.text("Enhance your business with industry proven software"));
+        requestModalTitle.shouldBe(visible).shouldHave(text(modalTitle));
         return this;
     }
 
-    public MainPage fillFirstNameField() {
-        FirstNameField.shouldBe(Condition.visible).val(firstName);
+    public MainPage fillFirstNameField(String firstName) {
+        firstNameField.shouldBe(visible).val(firstName);
         return this;
     }
 
-    public MainPage fillLastNameField() {
-        LastNameField.shouldBe(Condition.visible).val(lastName);
+    public MainPage fillLastNameField(String lastName) {
+        lastNameField.shouldBe(visible).val(lastName);
         return this;
     }
 
-    public MainPage fillPhoneField() {
-        PhoneField.shouldBe(Condition.visible).val(phoneNumber);
+    public MainPage fillPhoneField(String phoneNumber) {
+        phoneField.shouldBe(visible).val(phoneNumber);
         return this;
     }
 
-    public MainPage fillEmailField() {
-        EmailField.shouldBe(Condition.visible).val(email);
+    public MainPage fillEmailField(String email) {
+        emailField.shouldBe(visible).val(email);
         return this;
     }
 
     public MainPage fillMessageField() {
-        MessageField.shouldBe(Condition.visible).val(message);
+        messageField.shouldBe(visible).val(message);
         return this;
     }
 
     public MainPage signPrivacyPolicy() {
-        PrivacyPolicyCheckbox.shouldBe(Condition.visible).click();
+        privacyPolicyCheckbox.click();
         return this;
     }
 
     public MainPage makeARequest() {
-        SubmitBtn.shouldBe(Condition.visible); //.click(); закоментил чтобы не спамить
+        submitBtn.click();
+        return this;
+    }
+
+    public MainPage checkSuccessModal() {
+        successModal.shouldBe(visible);
+        successModalTitle.shouldBe(visible).shouldHave(text(successMessage));
+        getSuccessModalOkBtn.click();
         return this;
     }
 }
